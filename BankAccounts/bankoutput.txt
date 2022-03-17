@@ -1,0 +1,56 @@
+Account Title: Saeed Ghani
+Account Code: GH090
+Initial Balance: 2000
+Available Balance: 28000
+Current Status: Active
+Deposits:
+1. 30000 on 11/03/21
+Withdrawals:
+1. 4000 on 12/04/21 Successful
+2. 40000 on 15/06/21 Denied
+----------------------------------------
+Account Title: Sultan Ayesha
+Account Code: AS550
+Initial Balance: 50000
+Available Balance: 10000
+Current Status: Active
+Withdrawals:
+1. 40000 on 23/04/21 Successful
+2. 60000 on 05/05/21 Denied
+----------------------------------------
+Account Title: Motors Millat
+Account Code: MM344
+Initial Balance: 1.2e+06
+Available Balance: 1.15e+06
+Current Status: Active
+Withdrawals:
+1. 50000 on 05/05/21 Successful
+----------------------------------------
+Account Title: Cengez Jami
+Account Code: JC554
+Initial Balance: 500
+Available Balance: 28500
+Current Status: Active
+Deposits:
+1. 30000 on 25/04/21
+Withdrawals:
+1. 2000 on 22/06/21 Successful
+----------------------------------------
+Account Title: Sultan Multan
+Account Code: MS443
+Initial Balance: 500000
+Available Balance: 492000
+Current Status: Active
+Deposits:
+1. 2000 on 20/06/21
+Withdrawals:
+1. 10000 on 27/04/21 Successful
+----------------------------------------
+Account Title: Banda Jasmin
+Account Code: JB230
+Initial Balance: 70000
+Available Balance: 90000
+Current Status: Active
+Deposits:
+1. 20000 on 28/04/21
+----------------------------------------

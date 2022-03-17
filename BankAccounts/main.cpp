@@ -29,6 +29,7 @@ void initCommands(std::string command, std::ifstream *file, Bank *bank)
         *file >> code >> amount >> date;
         // std::cout << "Depoist " << code << " " << amount << " " << date << std::endl;
         bank->getAccount(code).depositAmount(amount, date);
+        // std::cout << " ---------- " << bank->getAccount(code).getDeposits().size() << endl;
         break;
     }
 
@@ -62,25 +63,69 @@ void readFile(Bank *bank)
 
 void writeFile(Bank *bank)
 {
+    std::ofstream *file = new std::ofstream;
+    file->open(OUTPUTFILE);
     std::vector<Account> accounts = bank->getAllAccounts();
     for (int i = 0; i < accounts.size(); i++)
     {
-        std::cout << accounts[i].getAccountCode() << std::endl;
-        std::cout << accounts[i].getAccountBalance() << std::endl;
-        std::cout << accounts[i].getAccountStatus() << std::endl;
-        std::cout << accounts[i].getAccountTitle() << std::endl;
+        accounts[i].updateStatus();
+        *file << "Account Title: " << accounts[i].getAccountTitle() << std::endl;
+        *file << "Account Code: " << accounts[i].getAccountCode() << std::endl;
+        *file << "Initial Balance: " << accounts[i].getInitialBalance() << std::endl;
+        *file << "Available Balance: " << accounts[i].getAccountBalance() << std::endl;
+        accounts[i].getAccountStatus() ? *file << "Current Status: Active" : *file << "Current Status: Dormant";
+        *file << std::endl;
+
         std::vector<Deposit> deposits = accounts[i].getDeposits();
         std::vector<Withdrawal> withdrawals = accounts[i].getWithdrawals();
-        for (int i = 0; i < deposits.size(); i++)
+        if (deposits.size())
         {
-            std::cout << deposits[i].getAmount() << std::endl;
-            std::cout << deposits[i].getDate() << std::endl;
+            int count = 1;
+            *file << "Deposits:" << std::endl;
+            for (int i = 0; i < deposits.size(); i++)
+            {
+                *file << count << ". " << deposits[i].getAmount() << " on " << deposits[i].getDate() << std::endl;
+                count++;
+            }
         }
-        for (int i = 0; i < withdrawals.size(); i++)
+        if (withdrawals.size())
         {
-            std::cout << withdrawals[i].getAmount() << std::endl;
-            std::cout << withdrawals[i].getDate() << std::endl;
+            int count = 1;
+            *file << "Withdrawals:" << std::endl;
+            for (int i = 0; i < withdrawals.size(); i++)
+            {
+                *file << count << ". " << withdrawals[i].getAmount() << " on " << withdrawals[i].getDate() << " " << withdrawals[i].getStatus() << std::endl;
+                count++;
+            }
         }
+        *file << "----------------------------------------" << std::endl;
+
+        // std::cout << "Account Title: " << accounts[i].getAccountTitle() << std::endl;
+        // std::cout << "Account Code: " << accounts[i].getAccountCode() << std::endl;
+        // std::cout << "Initial Balance: " << accounts[i].getInitialBalance() << std::endl;
+        // std::cout << "Available Balance: " << accounts[i].getAccountBalance() << std::endl;
+        // accounts[i].getAccountStatus() ? std::cout << "Current Status: Active" : std::cout << "Current Status: Dormant";
+        // std::cout << std::endl;
+
+        // std::vector<Deposit> deposits = accounts[i].getDeposits();
+        // std::vector<Withdrawal> withdrawals = accounts[i].getWithdrawals();
+        // if (deposits.size())
+        // {
+        //     std::cout << "Deposits:" << std::endl;
+        //     for (int i = 0; i < deposits.size(); i++)
+        //     {
+        //         std::cout << deposits[i].getAmount() << " on " << deposits[i].getDate() << std::endl;
+        //     }
+        // }
+        // if (withdrawals.size())
+        // {
+        //     std::cout << "Withdrawals:" << std::endl;
+        //     for (int i = 0; i < withdrawals.size(); i++)
+        //     {
+        //         std::cout << withdrawals[i].getAmount() << " on " << withdrawals[i].getDate() << " " << withdrawals[i].getStatus() << std::endl;
+        //     }
+        // }
+        // std::cout << "----------------------------------------" << std::endl;
     }
 }
 
@@ -90,7 +135,45 @@ int main()
     readFile(bank);
     writeFile(bank);
 
-    delete bank;
-    bank = NULL;
+    // bank.createBankAccount("test", "test", 1000);
+    // std::vector<Account> accounts = bank.getAllAccounts();
+    // Account acc = bank.getAccount("test");
+    // // std::cout << acc.getAccountBalance() << std::endl;
+    // bank.getAccount("test").depositAmount(1000, "11-March");
+    // std::cout
+    //     << acc.getAccountBalance() << std::endl;
+    // std::vector<Deposit> deposits = acc.getDeposits();
+    // std::cout << deposits.size();
+
+    // .depositAmount(1000, "11-March");
+
+    // std::cout << "----------" << std::endl;
+    // for (int i = 0; i < accounts.size(); i++)
+    // {
+    //     Account acc2 = bank.getAccount(accounts[i].getAccountCode());
+    //     // acc.depositAmount(1000, "11-March");
+
+    //     std::cout << acc2.getAccountTitle() << std::endl;
+    //     std::cout << acc2.getAccountBalance() << std::endl;
+    //     std::vector<Deposit> deposits2 = acc2.getDeposits();
+    //     std::cout << deposits2.size();
+    //     // accounts[i].depositAmount(1000, "11-March");
+    //     // std::vector<Deposit> deposits1 = accounts[i].getDeposits();
+    //     // std::cout << deposits.size();
+    // }
+
+    // delete bank;
+    // bank = NULL;
+
+    // Account account("test", "test", 1000);
+    // std::cout << account.getAccountBalance() << std::endl;
+    // account.depositAmount(1000, "11-March");
+    // std::cout << account.getAccountBalance() << std::endl;
+    // std::vector<Deposit> deposits = account.getDeposits();
+    // for (int i = 0; i < deposits.size(); i++)
+    // {
+    //     std::cout << deposits[i].getAmount() << std::endl;
+    //     std::cout << deposits[i].getDate() << std::endl;
+    // }
     return 0;
 }

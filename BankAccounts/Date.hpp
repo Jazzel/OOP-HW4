@@ -21,7 +21,10 @@ public:
 
     std::string getFormatedDate()
     {
-        std::string formatedDate = std::to_string(day) + "/" + std::to_string(month) + "/" + std::to_string(year);
+        std::string _day = day < 10 ? "0" + std::to_string(day) : std::to_string(day);
+        std::string _month = month < 10 ? "0" + std::to_string(month) : std::to_string(month);
+        std::string _year = std::to_string(year);
+        std::string formatedDate = _day + "/" + _month + "/" + _year;
         return formatedDate;
     }
 };

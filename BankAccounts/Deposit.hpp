@@ -5,18 +5,21 @@
 #include "Date.hpp"
 #include "Months.hpp"
 
+using namespace std;
+
 class Deposit
 {
 private:
+    // std::string code;
     double amount;
     Date date;
 
 public:
-    Deposit()
+    Deposit() : amount(0), date(Date())
     {
     }
 
-    Deposit(double _amount, std::string _date)
+    Deposit(double _amount, std::string _date) : amount(_amount)
     {
 
         std::replace(_date.begin(), _date.end(), '-', ' ');
@@ -34,7 +37,6 @@ public:
         int month = resolveMonths(words[1]);
         int year = words.size() > 2 ? stoi(words[2]) : 21;
 
-        amount = _amount;
         date = Date(day, month, year);
     }
 

@@ -43,4 +43,9 @@ public:
     {
         return date.getFormatedDate();
     }
+
+    string getStatus()
+    {
+        return status ? "Successful" : "Denied";
+    }
 };

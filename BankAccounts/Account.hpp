@@ -1,8 +1,11 @@
 #include <vector>
 #include <string>
+#include <iostream>
 
 #include "Deposit.hpp"
 #include "Withdrawal.hpp"
+
+using namespace std;
 
 class Account
 {
@@ -22,21 +25,37 @@ public:
         code = "";
         initialBalance = balance = 0;
         status = 0;
+        depositTransactions = {};
+        withdrawalTransactions = {};
     }
 
     Account(std::string _title, std::string _code, double _initialDeposit)
     {
-        title = _title;
+        std::replace(_title.begin(), _title.end(), '_', ' ');
+        _title = _title + " ";
+
+        std::vector<std::string> words;
+
+        size_t pos = 0;
+        while ((pos = _title.find(" ")) != std::string::npos)
+        {
+            words.push_back(_title.substr(0, pos));
+            _title.erase(0, pos + 1);
+        }
+        title = words[1] + " " + words[0];
+
         code = _code;
         initialBalance = balance = _initialDeposit;
         status = 1;
+        depositTransactions = {};
+        withdrawalTransactions = {};
     }
 
     void depositAmount(double _amount, std::string _date)
     {
         Deposit deposit(_amount, _date);
-        balance += _amount;
         depositTransactions.push_back(deposit);
+        balance += _amount;
     }
 
     void withdrawAmount(double _amount, std::string _date)
@@ -44,11 +63,14 @@ public:
         if (balance > _amount)
         {
             Withdrawal withdraw(_amount, _date, true);
+            withdrawalTransactions.push_back(withdraw);
+
             balance -= _amount;
         }
         else
         {
             Withdrawal withdraw(_amount, _date, false);
+            withdrawalTransactions.push_back(withdraw);
         }
     }
 
@@ -68,6 +90,10 @@ public:
     {
         return balance;
     }
+    double getInitialBalance()
+    {
+        return initialBalance;
+    }
     std::vector<Deposit> getDeposits()
     {
         return depositTransactions;
@@ -75,5 +101,13 @@ public:
     std::vector<Withdrawal> getWithdrawals()
     {
         return withdrawalTransactions;
+    }
+
+    void updateStatus()
+    {
+        if (balance < 5000)
+        {
+            status = 0;
+        }
     }
 };
