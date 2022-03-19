@@ -1,4 +1,12 @@
-
+/**
+ * ? @brief Choices - namespace
+ * * contains enum for Bank options
+ *
+ * ? @functions
+ * * resolveOption(std::string):
+ * *   - takes input as string and
+ * *     returns integer according to given input
+ */
 namespace Choices
 {
     enum Option
@@ -9,6 +17,7 @@ namespace Choices
         INVALID = 3,
     };
 
+    Choices::Option resolveOption(std::string);
 }
 Choices::Option resolveOption(std::string input)
 {

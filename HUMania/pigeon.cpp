@@ -1,14 +1,31 @@
+// ? header files
 #include "pigeon.hpp"
-// pigeon implementation will go here.
 
+// ! *******************************************************
+// !         CLASS DEFINITION IN THE HEADER FILE
+// ! *******************************************************
+
+/**
+ * ? @brief draw()
+ * * draws the Pigeon with SDL params, srcRect and moveRect co-ordinates
+ * * calls the fly() function to enable the animations
+ *
+ */
 void Pigeon::draw()
 {
     SDL_RenderCopy(Drawing::gRenderer, Drawing::assets, &srcRect, &moverRect);
+    fly();
 }
 
+/**
+ * ? @brief fly()
+ * * switches the srcRect with the help of frame variable
+ * * moves the pigeon to the right with the help of moverRect.x
+ * * resets the pigeon back to left when it touches the right corner.
+ *
+ */
 void Pigeon::fly()
 {
-    //
     switch (frame)
     {
     case 0:
@@ -34,11 +51,30 @@ void Pigeon::fly()
     }
 }
 
+/**
+ * ? @brief Construct a new Pigeon:: Pigeon object
+ * * default constructor
+ *
+ */
 Pigeon::Pigeon()
 {
-    // src coorinates from assets.png file, they have been found using spritecow.com
     srcRect = {7, 88, 155, 103};
-
-    // it will display pigeon on x = 30, y = 40 location, the size of pigeon is 50 width, 60 height
     moverRect = {30, 40, 50, 50};
+}
+
+/**
+ * ? @brief Construct a new Pigeon:: Pigeon object
+ * * constructor with x any y co-ordinates
+ *
+ * ? @param x
+ * * x co-ordinate of the screen where mouse is clicked
+ *
+ * ? @param y
+ * * y co-ordinate of the screen where mouse is clicked
+ *
+ */
+Pigeon::Pigeon(int x, int y)
+{
+    srcRect = {7, 88, 155, 103};
+    moverRect = {x, y, 50, 50};
 }

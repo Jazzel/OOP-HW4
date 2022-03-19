@@ -1,4 +1,22 @@
+// ? imports
 #include <string>
+
+/**
+ * ? @brief Date
+ * * stores dates for the transactions of the bank accounts
+ *
+ * ? @attributes
+ * * day, month and year as integers
+ *
+ * ? @functions
+ * * getFormatedDate():
+ * *   - formats the attributes to make it a valid date with the slashes (/) in between
+ *
+ * ? @constructors
+ * * Date(): empty constructor
+ * * Date(int, int, int):
+ * *   - takes 3 params and fills the attributes of the class with the inputs
+ */
 class Date
 {
 private:
@@ -23,8 +41,7 @@ public:
     {
         std::string _day = day < 10 ? "0" + std::to_string(day) : std::to_string(day);
         std::string _month = month < 10 ? "0" + std::to_string(month) : std::to_string(month);
-        std::string _year = std::to_string(year);
-        std::string formatedDate = _day + "/" + _month + "/" + _year;
+        std::string formatedDate = _day + "/" + _month + "/" + std::to_string(year);
         return formatedDate;
     }
 };

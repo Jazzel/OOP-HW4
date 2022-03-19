@@ -1,5 +1,15 @@
+// ? imports
 #include <cctype>
-
+/**
+ * ? @brief Months - namespace
+ * * contains enum for Month options
+ * * converts Month to numerical month
+ *
+ * ? @functions
+ * * resolveMonths(std::string):
+ * *   - takes input as string and
+ * *     returns integer according to given input
+ */
 namespace Months
 {
     enum Option
@@ -24,30 +34,31 @@ Months::Option resolveMonths(std::string input)
 {
     std::for_each(input.begin(), input.end(), [](char &c)
                   { c = ::tolower(c); });
+    input = input.substr(0, 3);
 
-    if (input == "january" || input == "jan")
+    if (input == "jan")
         return Months::Option::January;
-    if (input == "february" || input == "feb")
+    if (input == "feb")
         return Months::Option::February;
-    if (input == "march" || input == "mar")
+    if (input == "mar")
         return Months::Option::March;
-    if (input == "april" || input == "apr")
+    if (input == "apr")
         return Months::Option::April;
     if (input == "may")
         return Months::Option::May;
-    if (input == "june" || input == "jun")
+    if (input == "jun")
         return Months::Option::June;
-    if (input == "july" || input == "jul")
+    if (input == "jul")
         return Months::Option::July;
-    if (input == "august" || input == "aug")
+    if (input == "aug")
         return Months::Option::August;
-    if (input == "september" || input == "sept")
+    if (input == "sept")
         return Months::Option::September;
-    if (input == "october" || input == "oct")
+    if (input == "oct")
         return Months::Option::October;
-    if (input == "november" || input == "nov")
+    if (input == "nov")
         return Months::Option::November;
-    if (input == "december" || input == "dec")
+    if (input == "dec")
         return Months::Option::December;
 
     return Months::Option::Invalid;

@@ -20,8 +20,8 @@ Withdrawals:
 ----------------------------------------
 Account Title: Motors Millat
 Account Code: MM344
-Initial Balance: 1.2e+06
-Available Balance: 1.15e+06
+Initial Balance: 1200000
+Available Balance: 1150000
 Current Status: Active
 Withdrawals:
 1. 50000 on 05/05/21 Successful

@@ -1,19 +1,54 @@
+// ? imports
 #include <vector>
 #include <string>
 #include <iostream>
 
-#include "Deposit.hpp"
-#include "Withdrawal.hpp"
+// ? header files
+#include "DepositWithdrawal.hpp"
 
+// ? namespaces
 using namespace std;
 
+/**
+ * ? @brief Account
+ * * creates account for the bank::accounts vector
+ *
+ * ? @attributes
+ * * title: string type
+ * * code: string type
+ * * balance: int type
+ * * initialBalance: int type
+ * * status: bool type
+ * * depositTransactions: vector of type Deposit class
+ * * withdrawalTransactions: vector of type Withdrawal class
+ *
+ * ? @functions
+ * * depositAmount(): creates Deposit object and pushes it in depositTransactions
+ * * withdrawAmount(): creates Withdrawal object and pushes it in withdrawalTransactions
+ * * getAccountCode(): getter for account code
+ * * getAccountStatus(): getter for account status
+ * * getAccountTitle(): getter for account title
+ * * getAccountBalance(): getter for account balance
+ * * getInitialBalance(): getter for account initial balance
+ * * getDeposits(): getter for account deposits
+ * * getWithdrawals(): getter for account withdrawals
+ * * updateStatus(): updates status for account - 0: Dormant or 1: Active
+ *
+ * ? @constructor
+ * * Account(): default instructor
+ * * Account(std::string, std::string, int):
+ * *   - takes first param formats name according to requirment
+ * *   - assigns second param to code
+ * *   - assigns third param to balance and initialBalance
+ * *   - assigns empty object to vectors depositTransactions, withdrawalTransactions
+ */
 class Account
 {
 private:
     std::string title;
     std::string code;
-    double balance;
-    double initialBalance;
+    int balance;
+    int initialBalance;
     bool status;
     std::vector<Deposit> depositTransactions;
     std::vector<Withdrawal> withdrawalTransactions;
@@ -29,7 +64,7 @@ public:
         withdrawalTransactions = {};
     }
 
-    Account(std::string _title, std::string _code, double _initialDeposit)
+    Account(std::string _title, std::string _code, int _initialDeposit)
     {
         std::replace(_title.begin(), _title.end(), '_', ' ');
         _title = _title + " ";
@@ -51,20 +86,19 @@ public:
         withdrawalTransactions = {};
     }
 
-    void depositAmount(double _amount, std::string _date)
+    void depositAmount(int _amount, std::string _date)
     {
         Deposit deposit(_amount, _date);
         depositTransactions.push_back(deposit);
         balance += _amount;
     }
 
-    void withdrawAmount(double _amount, std::string _date)
+    void withdrawAmount(int _amount, std::string _date)
     {
         if (balance > _amount)
         {
             Withdrawal withdraw(_amount, _date, true);
             withdrawalTransactions.push_back(withdraw);
-
             balance -= _amount;
         }
         else
@@ -86,11 +120,11 @@ public:
     {
         return title;
     }
-    double getAccountBalance()
+    int getAccountBalance()
     {
         return balance;
     }
-    double getInitialBalance()
+    int getInitialBalance()
     {
         return initialBalance;
     }

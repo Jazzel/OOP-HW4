@@ -1,15 +1,39 @@
-#include "butterfly.hpp"
-#include "drawing.hpp"
+// ? imports
 #include <string>
 
+// ? header files
+#include "butterfly.hpp"
+#include "drawing.hpp"
+
+// ! *******************************************************
+// !         CLASS DEFINITION IN THE HEADER FILE
+// ! *******************************************************
+
+/**
+ * ? @brief draw()
+ * * draws the Butterfly with SDL params, srcRect and moveRect co-ordinates
+ * * calls the fly() function to enable the animations
+ *
+ */
 void Butterfly::draw()
 {
     SDL_RenderCopy(Drawing::gRenderer, Drawing::assets, &srcRect, &moverRect);
+    fly();
 }
 
+/**
+ * ? @brief fly()
+ * * switches the srcRect with the help of frame variable
+ * * moves the Butterfly to the right with the help of moverRect.x
+ * * if the down is true
+ * *     - moves the Butterfly to the downward with the help of moverRect.x
+ * *     - else moves the Butterfly to the upward with the help of moverRect.x
+ * * resets the Butterfly back to left when it touches the right corner.
+ * *
+ *
+ */
 void Butterfly::fly()
 {
-    //
     switch (frame)
     {
     case 0:
@@ -52,11 +76,30 @@ void Butterfly::fly()
     }
 }
 
+/**
+ * ? @brief Construct a new Butterfly:: Butterfly object
+ * * default constructor
+ *
+ */
 Butterfly::Butterfly()
 {
-    // src coorinates from assets.png file, they have been found using spritecow.com
     srcRect = {256, 24, 173, 134};
-
-    // it will display pigeon on x = 30, y = 40 location, the size of pigeon is 50 width, 60 height
     moverRect = {40, 50, 50, 50};
+}
+
+/**
+ * ? @brief Construct a new Butterfly:: Butterfly object
+ * * constructor with x any y co-ordinates
+ *
+ * ? @param x
+ * * x co-ordinate of the screen where mouse is clicked
+ *
+ * ? @param y
+ * * y co-ordinate of the screen where mouse is clicked
+ *
+ */
+Butterfly::Butterfly(int x, int y)
+{
+    srcRect = {256, 24, 173, 134};
+    moverRect = {x, y, 50, 50};
 }
